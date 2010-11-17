@@ -143,7 +143,7 @@ public class ControlActivity extends Activity implements PRemoteDroidActionRecei
 				this.startActivity(new Intent(this, HelpActivity.class));
 				break;
 			case UI_MENU_ITEM_ID:
-				// put your code to start up a UI menu page HERE
+				this.startActivity(new Intent(this, UIMainMenuActivity.class));
 				break;
 		}
 		

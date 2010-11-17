@@ -41,7 +41,9 @@
 		<activity
 			android:name=".activity.connection.BluetoothDevicesActivity"
 			android:label="@string/text_bluetooth_devices"></activity>
-	</application>
+	<activity android:name=".activity.UIMainMenuActivity" android:label="@string/text_UI_Main_Menu_Title"></activity>
+<activity android:name=".activity.UIMainHelpActivity" android:label="@string/text_UI_Main_Help_Title"></activity>
+</application>
 	<supports-screens
 		android:smallScreens="true"
 		android:anyDensity="true"
