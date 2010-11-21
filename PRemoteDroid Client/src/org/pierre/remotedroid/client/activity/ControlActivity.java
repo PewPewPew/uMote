@@ -40,6 +40,9 @@ public class ControlActivity extends Activity implements PRemoteDroidActionRecei
 	private static final int CONNECTIONS_MENU_ITEM_ID = 2;
 	private static final int SETTINGS_MENU_ITEM_ID = 3;
 	private static final int HELP_MENU_ITEM_ID = 4;
+	// Added for UI mode
+	private static final int UI_MENU_ITEM_ID = 5;
+	private static CharSequence UItext = "UI Menu";
 	
 	private PRemoteDroid application;
 	private SharedPreferences preferences;
@@ -109,6 +112,9 @@ public class ControlActivity extends Activity implements PRemoteDroidActionRecei
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		menu.add(Menu.NONE, FILE_EXPLORER_MENU_ITEM_ID, Menu.NONE, this.getResources().getString(R.string.text_file_explorer));
+		// added for UI menu
+		menu.add(Menu.NONE, UI_MENU_ITEM_ID, Menu.NONE, UItext);
+		
 		menu.add(Menu.NONE, KEYBOARD_MENU_ITEM_ID, Menu.NONE, this.getResources().getString(R.string.text_keyboard));
 		menu.add(Menu.NONE, CONNECTIONS_MENU_ITEM_ID, Menu.NONE, this.getResources().getString(R.string.text_connections));
 		menu.add(Menu.NONE, SETTINGS_MENU_ITEM_ID, Menu.NONE, this.getResources().getString(R.string.text_settings));
@@ -135,6 +141,9 @@ public class ControlActivity extends Activity implements PRemoteDroidActionRecei
 				break;
 			case HELP_MENU_ITEM_ID:
 				this.startActivity(new Intent(this, HelpActivity.class));
+				break;
+			case UI_MENU_ITEM_ID:
+				this.startActivity(new Intent(this, UIMainMenuActivity.class));
 				break;
 		}
 		
