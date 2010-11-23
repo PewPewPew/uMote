@@ -43,6 +43,7 @@
 			android:label="@string/text_bluetooth_devices"></activity>
 	<activity android:name=".activity.UIMainMenuActivity" android:label="@string/text_UI_Main_Menu_Title"></activity>
 <activity android:name=".activity.UIMainHelpActivity" android:label="@string/text_UI_Main_Help_Title"></activity>
+<activity android:label="@string/text_UI_Key_Binding" android:name=".activity.KeyBindingActivity"></activity>
 </application>
 	<supports-screens
 		android:smallScreens="true"

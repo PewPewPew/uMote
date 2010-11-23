@@ -90,6 +90,7 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 	public void UISelection(View view)
 	{
 		// Go to the User Interface Selection screen
+		this.startActivity(new Intent(this, KeyBindingActivity.class));
 	}
 	
 	public void UICreation(View view)
