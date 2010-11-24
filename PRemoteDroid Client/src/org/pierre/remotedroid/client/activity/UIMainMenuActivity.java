@@ -60,7 +60,6 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 		this.application.unregisterActionReceiver(this);
 	}
 	
-	@Override
 	public void receiveAction(PRemoteDroidAction action)
 	{
 		// TODO Auto-generated method stub
@@ -96,6 +95,7 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 	public void UICreation(View view)
 	{
 		// Go to the User Interface Creation screen
+		this.startActivity(new Intent(this, CreateUIActivity.class));
 	}
 	
 	public void UIEdit(View view)

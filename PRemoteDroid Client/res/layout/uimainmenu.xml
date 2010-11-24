@@ -17,7 +17,7 @@
      android:layout_height="87px"
      android:layout_width="fill_parent"
      android:text="@string/text_UI_Main_Menu_UICreation"
-     android:onClick="UISelection" 
+     android:onClick="UICreation" 
      android:layout_x="0px"
 	 android:layout_y="145px"/>
        <Button 
@@ -25,7 +25,7 @@
      android:layout_height="87px"
      android:layout_width="fill_parent"
      android:text="@string/text_UI_Main_Menu_UIEdit"
-     android:onClick="UISelection" 
+     android:onClick="UIEdit" 
      android:layout_x="0px"
 	 android:layout_y="270px"/>
 	        <Button 
