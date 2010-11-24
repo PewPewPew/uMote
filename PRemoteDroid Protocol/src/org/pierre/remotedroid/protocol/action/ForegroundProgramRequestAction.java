@@ -17,6 +17,7 @@ public class ForegroundProgramRequestAction extends PRemoteDroidAction
 	
 	public void toDataOutputStream(DataOutputStream dos) throws IOException
 	{
+		// THIS IS A COMMENT!
 		dos.writeByte(FOREGROUND_PROGRAM_REQUEST);
 	}
 }
