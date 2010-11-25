@@ -1,40 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical">
-  <Button 
-  	 android:id="@+id/UI_Selection_Button"
-     android:layout_height="87px"
-     android:layout_width="fill_parent"
-     android:text="@string/text_UI_Main_Menu_UISelection"
-     android:onClick="UISelection" 
-     android:layout_x="0px"
-	 android:layout_y="14px"/>
-       <Button 
-  	 android:id="@+id/UI_Creation_Button"
-     android:layout_height="87px"
-     android:layout_width="fill_parent"
-     android:text="@string/text_UI_Main_Menu_UICreation"
-     android:onClick="UICreation" 
-     android:layout_x="0px"
-	 android:layout_y="145px"/>
-       <Button 
-  	 android:id="@+id/UI_Edit_Button"
-     android:layout_height="87px"
-     android:layout_width="fill_parent"
-     android:text="@string/text_UI_Main_Menu_UIEdit"
-     android:onClick="UIEdit" 
-     android:layout_x="0px"
-	 android:layout_y="270px"/>
-	        <Button 
-  	 android:id="@+id/UI_Help_Button"
-     android:layout_height="47px"
-     android:layout_width="fill_parent"
-     android:text="@string/text_UI_Main_Menu_UIHelp"
-     android:onClick="UIHelp" 
-     android:layout_x="0px"
-	 android:layout_y="385px"/>
-  
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<Button android:id="@+id/UI_Selection_Button"
+		android:layout_height="87px" android:layout_width="fill_parent"
+		android:text="@string/text_UI_Main_Menu_UISelection" android:onClick="UISelection"
+		android:layout_x="0px" android:layout_y="14px" />
+	<Button android:id="@+id/UI_Creation_Button"
+		android:layout_height="87px" android:layout_width="fill_parent"
+		android:text="@string/text_UI_Main_Menu_UICreation" android:onClick="UICreation"
+		android:layout_x="0px" android:layout_y="145px" />
+	<Button android:id="@+id/UI_Edit_Button" android:layout_height="87px"
+		android:layout_width="fill_parent" android:text="@string/text_UI_Main_Menu_UIEdit"
+		android:onClick="UIEdit" android:layout_x="0px" android:layout_y="270px" />
+	<Button android:id="@+id/UI_Help_Button" android:layout_height="47px"
+		android:layout_width="fill_parent" android:text="@string/text_UI_Main_Menu_UIHelp"
+		android:onClick="UIHelp" android:layout_x="0px" android:layout_y="385px" />
+
 </AbsoluteLayout>

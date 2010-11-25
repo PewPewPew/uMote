@@ -66,12 +66,18 @@
 	</TextView>
 	<AbsoluteLayout android:id="@+id/ButtonSampleBar"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5px" android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true">
-		<Button android:id="@+id/ButtonSample" android:layout_width="fill_parent"
-			android:layout_height="wrap_content" android:text="Button"
+		android:padding="5px"
+		android:layout_centerHorizontal="true" android:layout_below="@+id/ButtonSampleBarLabel"
+		android:layout_alignParentLeft="true">
+		<Button android:id="@+id/ButtonSample" android:layout_width="90px"
+			android:layout_height="38px" android:text="Button"
 			android:background="@drawable/graybutton"
 			android:layout_x="0px" android:layout_y="2px">
 		</Button>
 	</AbsoluteLayout>
+	<TextView android:id="@+id/ButtonSampleBarLabel"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:layout_marginTop="5px" android:text="Preview Your Button:"
+		android:textStyle="bold" android:textSize="14sp">
+	</TextView>
 </RelativeLayout>

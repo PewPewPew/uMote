@@ -5,6 +5,7 @@ import org.pierre.remotedroid.client.R;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,16 +17,19 @@ import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Toast;
 
 public class CreateUIActivity extends Activity
 {
 	
 	private static CharSequence ExitText = "Return to uMote";
 	
-	private FrameLayout layout;
+	private RelativeLayout layout;
 	
 	/** button configuration related **/
 	private Dialog dialog;
@@ -39,13 +43,15 @@ public class CreateUIActivity extends Activity
 	private final static int START_DRAGGING = 0;
 	private final static int STOP_DRAGGING = 1;
 	
+	Toast toast;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.uicreation);
 		
-		layout = (FrameLayout) findViewById(R.id.UICreationLayout);
+		layout = (RelativeLayout) findViewById(R.id.UICreationLayout);
 	}
 	
 	@Override
@@ -81,6 +87,7 @@ public class CreateUIActivity extends Activity
 		dialog.show();
 		
 		newBtn = (Button) dialog.findViewById(R.id.ButtonSample);
+		newBtn.setDrawingCacheEnabled(true);
 		
 		buttonLabel = (EditText) dialog.findViewById(R.id.ButtonSampleLabelInput);
 		buttonLabel.setOnKeyListener(new OnKeyListener()
@@ -156,20 +163,17 @@ public class CreateUIActivity extends Activity
 		// btn.scrollTo(20, 20);
 		if (newBtn != null)
 		{
-			Button addedButton = new Button(CreateUIActivity.this);
-			addedButton.setBackgroundDrawable(newBtn.getBackground());
-			addedButton.setText(newBtn.getText());
-			FrameLayout.LayoutParams layoutParam = new FrameLayout.LayoutParams(90, 38);
+			ImageView addedButton = new ImageView(CreateUIActivity.this);
+			addedButton.setImageBitmap(newBtn.getDrawingCache());
+			RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(90, 38);
 			layoutParam.topMargin = 50;
 			layoutParam.leftMargin = 100;
-			addedButton.setLayoutParams(layoutParam);
+			// addedButton.setLayoutParams(layoutParam);
 			
-			addedButton.setPadding(50, 100, 0, 0);
+			// addedButton.setPadding(50, 100, 0, 0);
 			
 			addedButton.setOnTouchListener(new OnTouchListener()
 			{
-				// FrameLayout.LayoutParams position = new
-				// FrameLayout.LayoutParams(90, 38);
 				
 				public boolean onTouch(View view, MotionEvent motion)
 				{
@@ -185,11 +189,18 @@ public class CreateUIActivity extends Activity
 					{
 						if (status == START_DRAGGING)
 						{
-							System.out.println("Dragging");
-							// position.topMargin = (int) motion.getX();
-							// position.leftMargin = (int) motion.getY();
-							// ((Button) view).setLayoutParams(position);
-							view.setPadding((int) motion.getX(), (int) motion.getY(), 0, 0);
+							toast = Toast.makeText(CreateUIActivity.this, "Draging", 3000);
+							toast.show();
+							RelativeLayout.LayoutParams position = (LayoutParams) view.getLayoutParams();
+							position.topMargin = (int) motion.getX();
+							position.leftMargin = (int) motion.getY();
+							((ImageView) view).setLayoutParams(position);
+							
+							// view.setPadding((int) motion.getRawX(), (int)
+							// motion.getRawY(), 0, 0);
+							view.invalidate();
+							// view.setPadding((int) motion.getX(), (int)
+							// motion.getY(), 0, 0);
 						}
 					}
 					return false;
@@ -197,7 +208,7 @@ public class CreateUIActivity extends Activity
 				
 			});
 			
-			layout.addView(addedButton);
+			layout.addView(addedButton, layoutParam);
 		}
 	}
 }
