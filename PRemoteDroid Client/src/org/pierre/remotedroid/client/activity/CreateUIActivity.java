@@ -4,7 +4,6 @@ import org.pierre.remotedroid.client.R;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -17,10 +16,10 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 public class CreateUIActivity extends Activity
 {
@@ -106,7 +105,8 @@ public class CreateUIActivity extends Activity
 		buttonHeight = MIN_SIZE;
 		
 		buttonString = "Button";
-		buttonColor = Color.GRAY;
+		// buttonColor = Color.GRAY;
+		buttonColor = R.drawable.graybutton;
 		
 		dialog = new Dialog(CreateUIActivity.this);
 		
@@ -140,18 +140,21 @@ public class CreateUIActivity extends Activity
 				
 				if (checkId == R.id.RadioRed)
 				{
-					newBtn.setBackgroundResource(R.drawable.redbutton);
-					buttonColor = Color.RED;
+					// newBtn.setBackgroundResource(R.drawable.redbutton);
+					// buttonColor = Color.RED;
+					buttonColor = R.drawable.redbutton;
 				}
 				else if (checkId == R.id.RadioOrange)
 				{
-					newBtn.setBackgroundResource(R.drawable.orangebutton);
-					buttonColor = Color.BLUE;
+					// newBtn.setBackgroundResource(R.drawable.orangebutton);
+					// buttonColor = Color.BLUE;
+					buttonColor = R.drawable.orangebutton;
 				}
 				else if (checkId == R.id.RadioGray)
 				{
-					newBtn.setBackgroundResource(R.drawable.graybutton);
-					buttonColor = Color.GRAY;
+					// newBtn.setBackgroundResource(R.drawable.graybutton);
+					// buttonColor = Color.GRAY;
+					buttonColor = R.drawable.graybutton;
 				}
 			}
 			
@@ -176,7 +179,8 @@ public class CreateUIActivity extends Activity
 				buttonLabel.setText("Button");
 				newBtn.setText("Button");
 				buttonString = "Button";
-				buttonColor = Color.GRAY;
+				// buttonColor = Color.GRAY;
+				buttonColor = R.drawable.graybutton;
 				colorGroup.check(R.id.RadioGray);
 			}
 			
@@ -411,7 +415,8 @@ public class CreateUIActivity extends Activity
 		{
 			TextView addedButton = new TextView(CreateUIActivity.this);
 			addedButton.setText(buttonString);
-			addedButton.setBackgroundColor(buttonColor);
+			// addedButton.setBackgroundColor(buttonColor);
+			addedButton.setBackgroundResource(buttonColor);
 			
 			// ImageView addedButton = new ImageView(CreateUIActivity.this);
 			// addedButton.setImageBitmap(newBtn.getDrawingCache());
