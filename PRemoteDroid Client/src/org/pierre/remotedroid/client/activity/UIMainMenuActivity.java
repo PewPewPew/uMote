@@ -43,6 +43,7 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 		UICreationButton = (Button) findViewById(R.id.UI_Creation_Button);
 		UIEditButton = (Button) findViewById(R.id.UI_Edit_Button);
 		UIHelpButton = (Button) findViewById(R.id.UI_Help_Button);
+		
 	}
 	
 	protected void onResume()
@@ -60,7 +61,6 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 		this.application.unregisterActionReceiver(this);
 	}
 	
-	@Override
 	public void receiveAction(PRemoteDroidAction action)
 	{
 		// TODO Auto-generated method stub
@@ -90,11 +90,13 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 	public void UISelection(View view)
 	{
 		// Go to the User Interface Selection screen
+		this.startActivity(new Intent(this, KeyBindingActivity.class));
 	}
 	
 	public void UICreation(View view)
 	{
 		// Go to the User Interface Creation screen
+		this.startActivity(new Intent(this, CreateUIActivity.class));
 	}
 	
 	public void UIEdit(View view)

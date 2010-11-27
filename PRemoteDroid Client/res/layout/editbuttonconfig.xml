@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  android:id="@+id/editButtonConfigLayout"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:padding="7dip">
+  
+  	<Button android:id="@+id/EditKeybindButton"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="Edit Keybinding" 
+		android:textSize="20dip"
+		android:layout_centerHorizontal="true"
+		android:layout_marginBottom="10dip">
+	</Button>
+		<Button android:id="@+id/EditRenameButton"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="Rename" 
+		android:textSize="20dip"
+		android:layout_below="@+id/EditKeybindButton"
+		android:layout_marginBottom="20dip">
+	</Button>
+	<Button android:id="@+id/EditDeleteButton"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="Delete Button" 
+		android:textSize="20dip"
+		android:layout_below="@+id/EditRenameButton"
+		android:layout_marginBottom="20dip">
+	</Button>
+	<Button android:id="@+id/EditCancelButton"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:text="Cancel" 
+		android:textSize="20dip"
+		android:layout_below="@+id/EditDeleteButton">
+	</Button>
+</RelativeLayout>
