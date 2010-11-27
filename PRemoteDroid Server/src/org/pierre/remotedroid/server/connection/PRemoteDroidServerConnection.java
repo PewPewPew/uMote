@@ -18,11 +18,14 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import org.chris.umote.server.win32.NativeWrapper;
 import org.pierre.remotedroid.protocol.PRemoteDroidConnection;
 import org.pierre.remotedroid.protocol.action.AuthentificationAction;
 import org.pierre.remotedroid.protocol.action.AuthentificationResponseAction;
 import org.pierre.remotedroid.protocol.action.FileExploreRequestAction;
 import org.pierre.remotedroid.protocol.action.FileExploreResponseAction;
+import org.pierre.remotedroid.protocol.action.ForegroundProgramRequestAction;
+import org.pierre.remotedroid.protocol.action.ForegroundProgramResponseAction;
 import org.pierre.remotedroid.protocol.action.KeyboardAction;
 import org.pierre.remotedroid.protocol.action.MouseClickAction;
 import org.pierre.remotedroid.protocol.action.MouseMoveAction;
@@ -121,6 +124,10 @@ public class PRemoteDroidServerConnection implements Runnable
 			{
 				this.keyboard((KeyboardAction) action);
 			}
+			else if (action instanceof ForegroundProgramRequestAction)
+			{
+				this.getForegroundProcess((ForegroundProgramRequestAction) action);
+			}
 		}
 		else
 		{
@@ -141,6 +148,12 @@ public class PRemoteDroidServerConnection implements Runnable
 				}
 			}
 		}
+	}
+	
+	private void getForegroundProcess(ForegroundProgramRequestAction action)
+	{
+		String process = NativeWrapper.getForegroundProgram();
+		this.sendAction(new ForegroundProgramResponseAction(process));
 	}
 	
 	private void authentificate(AuthentificationAction action)

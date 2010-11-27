@@ -17,6 +17,8 @@ public abstract class PRemoteDroidAction
 	public static final byte SCREEN_CAPTURE_RESPONSE = 7;
 	public static final byte FILE_EXPLORE_REQUEST = 8;
 	public static final byte FILE_EXPLORE_RESPONSE = 9;
+	public static final byte FOREGROUND_PROGRAM_REQUEST = 10;
+	public static final byte FOREGROUND_PROGRAM_RESPONSE = 11;
 	
 	public static PRemoteDroidAction parse(DataInputStream dis) throws IOException
 	{
@@ -44,6 +46,10 @@ public abstract class PRemoteDroidAction
 				return FileExploreRequestAction.parse(dis);
 			case FILE_EXPLORE_RESPONSE:
 				return FileExploreResponseAction.parse(dis);
+			case FOREGROUND_PROGRAM_REQUEST:
+				return ForegroundProgramRequestAction.parse(dis);
+			case FOREGROUND_PROGRAM_RESPONSE:
+				return ForegroundProgramResponseAction.parse(dis);
 			default:
 				throw new ProtocolException();
 		}
