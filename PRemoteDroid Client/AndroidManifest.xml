@@ -4,7 +4,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<uses-sdk android:minSdkVersion="3" />
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:name=".app.PRemoteDroid">
+		android:name=".app.PRemoteDroid" android:debuggable="true">
 		<activity android:name=".activity.ControlActivity"
 			android:label="@string/app_name">
 			<intent-filter>
@@ -27,13 +27,16 @@
 		<activity android:name=".activity.connection.BluetoothDevicesActivity"
 			android:label="@string/text_bluetooth_devices"></activity>
 		<activity android:name=".activity.UIMainMenuActivity"
-			android:label="@string/text_UI_Main_Menu_Title"></activity>
+			android:label="@string/text_UI_Main_Menu_Title"
+			android:screenOrientation="portrait"></activity>
 		<activity android:name=".activity.UIMainHelpActivity"
 			android:label="@string/text_UI_Main_Help_Title"></activity>
 		<activity android:name=".activity.CreateUIActivity"
-			android:label="@string/text_UI_Creation_Title"></activity>
+			android:label="@string/text_UI_Creation_Title"
+			android:screenOrientation="portrait"></activity>
 		<activity android:name=".activity.KeyBindingActivity"
-			android:label="@string/text_Key_Binding_Title"></activity>
+			android:label="@string/text_Key_Binding_Title"
+			android:screenOrientation="landscape"></activity>
 	
 </application>
 	<supports-screens android:smallScreens="true"
