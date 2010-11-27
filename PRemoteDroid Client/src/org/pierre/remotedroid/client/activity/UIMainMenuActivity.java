@@ -43,6 +43,7 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 		UICreationButton = (Button) findViewById(R.id.UI_Creation_Button);
 		UIEditButton = (Button) findViewById(R.id.UI_Edit_Button);
 		UIHelpButton = (Button) findViewById(R.id.UI_Help_Button);
+		
 	}
 	
 	protected void onResume()

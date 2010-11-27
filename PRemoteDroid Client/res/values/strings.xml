@@ -183,4 +183,6 @@
 <string name="text_UI_Help_Usage_Content">First, using pRemoteDroid’s mouse control, open a program you want to remotely control. Then click anywhere in that open program to have your computer recognize it as the currently active program.\n\n Hit your menu button on your smartphone and select the ‘UI Menu’ button. From the main menu you have three options.\n\n   1. Select a remote control User Interface that you have previously created.\n   2. Create a new user interface.\n   3. Edit a previously saved remote control User Interface\n\n When you use option 1 the selected remote control User Interface will come up which allows for your smartphone to be used in the same way one would use a TV remote control.\n\n To exit, just hit the menu button on your smartphone and select ‘Exit to mousepad’ which will bring you back to the default pRemoteDroid mousepad screen. </string>
 
 <string name="text_UI_Main_Help_Title">uMote Help</string>
+
+
 </resources>

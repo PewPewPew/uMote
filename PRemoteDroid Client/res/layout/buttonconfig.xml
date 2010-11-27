@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/buttonConfigLayout"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:padding="7px" xmlns:android="http://schemas.android.com/apk/res/android">
+	android:padding="7dip" xmlns:android="http://schemas.android.com/apk/res/android">
 	<Button android:id="@+id/CreateUICancelButton"
-		android:layout_width="90px" android:layout_height="wrap_content"
+		android:layout_width="90dip" android:layout_height="wrap_content"
 		android:text="Cancel" android:layout_alignTop="@+id/CreateUIResetButton"
 		android:layout_toRightOf="@+id/CreateUIResetButton">
 	</Button>
 	<Button android:id="@+id/CreateUIResetButton"
-		android:layout_width="90px" android:layout_height="wrap_content"
+		android:layout_width="90dip" android:layout_height="wrap_content"
 		android:text="Reset" android:layout_alignTop="@+id/CreateUICreateButton"
 		android:layout_toRightOf="@+id/CreateUICreateButton">
 	</Button>
 	<Button android:id="@+id/CreateUICreateButton"
-		android:layout_width="90px" android:layout_height="wrap_content"
+		android:layout_width="90dip" android:layout_height="wrap_content"
 		android:text="Create" android:layout_below="@+id/ButtonSampleColorBar">
 	</Button>
 	<LinearLayout android:id="@+id/ButtonSampleColorBar"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="3px" android:layout_marginBottom="10px"
+		android:padding="3dip" android:layout_marginBottom="10dip"
 		android:layout_below="@+id/ButtonSampleColorLabel"
 		android:layout_centerHorizontal="true">
 		<RadioGroup android:id="@+id/ColorRadioGroup"
@@ -27,57 +27,108 @@
 			<RadioButton android:id="@+id/RadioRed"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 			</RadioButton>
-			<TextView android:id="@+id/ColorRed" android:layout_width="48px"
-				android:layout_height="48px" android:background="#fff73434">
+			<TextView android:id="@+id/ColorRed" android:layout_width="48dip"
+				android:layout_height="48dip" android:background="#fff73434">
 			</TextView>
 			<RadioButton android:id="@+id/RadioOrange"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 			</RadioButton>
 
 			<TextView android:id="@+id/ColorOrange"
-				android:layout_width="48px" android:layout_height="48px"
+				android:layout_width="48dip" android:layout_height="48dip"
 				android:background="#fffca534">
 			</TextView>
 			<RadioButton android:id="@+id/RadioGray" android:checked="true"
 				android:layout_width="wrap_content" android:layout_height="wrap_content">
 			</RadioButton>
-			<TextView android:id="@+id/ColorGray" android:layout_width="48px"
-				android:layout_height="48px" android:background="#ffd1d1d1">
+			<TextView android:id="@+id/ColorGray" android:layout_width="48dip"
+				android:layout_height="48dip" android:background="#ffd1d1d1">
 			</TextView>
 		</RadioGroup>
 	</LinearLayout>
 	<TextView android:id="@+id/ButtonSampleColorLabel"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="10px" android:text="Color Your Button:"
+		android:layout_marginTop="10dip" android:text="Color Your Button:"
 		android:textStyle="bold" android:textSize="14sp" android:layout_below="@+id/ButtonSampleLabelInput"
 		android:layout_alignParentLeft="true">
 	</TextView>
 	<EditText android:id="@+id/ButtonSampleLabelInput"
-		android:layout_width="300px" android:layout_height="wrap_content"
+		android:layout_width="300dip" android:layout_height="wrap_content"
 		android:text="Button" android:textSize="14sp" android:gravity="center_vertical"
 		android:autoText="true" android:layout_below="@+id/ButtonSampleLabel"
 		android:layout_alignParentLeft="true">
 	</EditText>
 	<TextView android:id="@+id/ButtonSampleLabel"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="10px" android:text="Name Your Button:"
+		android:layout_marginTop="10dip" android:text="Name Your Button:"
 		android:textStyle="bold" android:textSize="14sp" android:layout_below="@+id/ButtonSampleBar"
 		android:layout_alignParentLeft="true">
 	</TextView>
 	<AbsoluteLayout android:id="@+id/ButtonSampleBar"
 		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5px"
+		android:padding="5dip"
 		android:layout_centerHorizontal="true" android:layout_below="@+id/ButtonSampleBarLabel"
 		android:layout_alignParentLeft="true">
-		<Button android:id="@+id/ButtonSample" android:layout_width="90px"
-			android:layout_height="38px" android:text="Button"
+		<Button android:id="@+id/ButtonSample" android:layout_width="30dip"
+			android:layout_height="38dip" android:text="Button"
 			android:background="@drawable/graybutton"
-			android:layout_x="0px" android:layout_y="2px">
+			android:layout_x="0dip" android:layout_y="2dip">
 		</Button>
 	</AbsoluteLayout>
 	<TextView android:id="@+id/ButtonSampleBarLabel"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="5px" android:text="Preview Your Button:"
+	    android:text="Preview:"
 		android:textStyle="bold" android:textSize="14sp">
 	</TextView>
+	<TextView android:id="@+id/ButtonWidthLabel"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+	    android:text="Width:"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="60dip"
+		android:textStyle="bold" android:textSize="14sp">
+	</TextView>
+	<TextView android:id="@+id/ButtonHeightLabel"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+	    android:text="Height:"
+	    android:layout_alignBottom="@+id/ButtonWidthLabel"
+	    android:layout_alignRight="@+id/ButtonWidthLabel"
+	    android:layout_marginRight="100dip"
+		android:textStyle="bold" android:textSize="14sp">
+	</TextView>
+	<TextView android:id="@+id/WidthNumber"
+		android:layout_width="38dip" android:layout_height="wrap_content"
+	    android:layout_below="@+id/ButtonWidthLabel"
+	    android:layout_alignLeft="@+id/ButtonWidthLabel"
+	    android:layout_marginTop="10dip"
+		android:textStyle="bold" android:textSize="20sp">
+	</TextView>
+	<Button android:id="@+id/WidthUpButton"
+		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:text="+" 
+		android:layout_below="@+id/ButtonWidthLabel"
+		android:layout_toRightOf="@+id/WidthNumber">
+	</Button>
+	<Button android:id="@+id/WidthDownButton"
+		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:text="-" android:layout_toRightOf="@+id/WidthUpButton"
+		android:layout_alignBottom="@+id/WidthUpButton">
+	</Button>
+	<TextView android:id="@+id/HeightNumber"
+		android:layout_width="38dip" android:layout_height="wrap_content"
+	    android:layout_below="@+id/ButtonHeightLabel"
+	    android:layout_alignLeft="@+id/ButtonHeightLabel"
+	    android:layout_marginTop="10dip"
+		android:textStyle="bold" android:textSize="20sp">
+	</TextView>
+	<Button android:id="@+id/HeightUpButton"
+		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:text="+" 
+		android:layout_below="@+id/ButtonHeightLabel"
+		android:layout_toRightOf="@+id/HeightNumber">
+	</Button>
+	<Button android:id="@+id/HeightDownButton"
+		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:text="-" android:layout_toRightOf="@+id/HeightUpButton"
+		android:layout_alignBottom="@+id/HeightUpButton">
+	</Button>
 </RelativeLayout>
