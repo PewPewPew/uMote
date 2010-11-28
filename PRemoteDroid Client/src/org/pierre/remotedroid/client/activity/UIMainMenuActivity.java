@@ -6,6 +6,8 @@ import org.pierre.remotedroid.protocol.PRemoteDroidActionReceiver;
 import org.pierre.remotedroid.protocol.action.PRemoteDroidAction;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +29,9 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 	private Button UICreationButton;
 	private Button UIEditButton;
 	private Button UIHelpButton;
+	
+	// temporary
+	static final int KEY_BIND_REQUEST = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -90,7 +95,33 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 	public void UISelection(View view)
 	{
 		// Go to the User Interface Selection screen
-		this.startActivity(new Intent(this, KeyBindingActivity.class));
+		
+		// temporary
+		this.startActivityForResult(new Intent(this, KeyBindingActivity.class), KEY_BIND_REQUEST);
+		
+	}
+	
+	// temporary
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if (requestCode == KEY_BIND_REQUEST)
+		{
+			if (resultCode == RESULT_OK)
+			{
+				Bundle bundle = data.getExtras();
+				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("Debug");
+				alertDialog.setMessage(bundle.getString("keys"));
+				alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						return;
+					}
+				});
+				alertDialog.show();
+			}
+		}
 	}
 	
 	public void UICreation(View view)

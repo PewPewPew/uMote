@@ -3,11 +3,9 @@ package org.pierre.remotedroid.client.activity;
 import org.pierre.remotedroid.client.R;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,10 +17,10 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout.LayoutParams;
 
 public class CreateUIActivity extends Activity
 {
@@ -32,8 +30,8 @@ public class CreateUIActivity extends Activity
 	
 	/** button configuration related **/
 	private Dialog dialog;
-	AlertDialog.Builder builder;
-	AlertDialog alertDialog;
+	private Button newBtn;
+	// private Button addedButton;
 	private EditText buttonLabel;
 	private RadioGroup colorGroup;
 	/** END button configuration related **/
@@ -95,44 +93,6 @@ public class CreateUIActivity extends Activity
 				// they are in editButton mode
 				this.setTitle(EditText);
 				break;
-			case R.id.ResetUIScreen:
-				// remove every thing from the screen and reset all the values
-				for (int i = 0; i < layout.getChildCount(); i++)
-				{
-					layout.removeViewAt(i);
-				}
-				currentlySelected = Integer.MAX_VALUE;
-				savedX = 0;
-				savedY = 0;
-				break;
-			case R.id.SaveUI:
-				// create an alert box is there's no child but still need to
-				// save the UI
-				if (layout.getChildCount() == 0)
-				{
-					builder = new AlertDialog.Builder(CreateUIActivity.this);
-					builder.setMessage("Are you sure you want to save the UI without any button?");
-					builder.setCancelable(false);
-					builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
-					{
-						public void onClick(DialogInterface dialog, int id)
-						{
-							// CreateUIActivity.this.finish();
-						}
-					});
-					builder.setNegativeButton("No", new DialogInterface.OnClickListener()
-					{
-						public void onClick(DialogInterface dialog, int id)
-						{
-							dialog.cancel();
-						}
-					});
-					alertDialog = builder.create();
-					alertDialog.show();
-				}
-				break;
-			case R.id.LoadUI:
-				break;
 			default:
 				return super.onOptionsItemSelected(item);
 				
@@ -146,7 +106,7 @@ public class CreateUIActivity extends Activity
 		buttonHeight = MIN_SIZE;
 		
 		buttonString = "Button";
-		buttonColor = R.drawable.graybutton;
+		buttonColor = Color.GRAY;
 		
 		dialog = new Dialog(CreateUIActivity.this);
 		
@@ -156,11 +116,16 @@ public class CreateUIActivity extends Activity
 		
 		dialog.show();
 		
+		newBtn = (Button) dialog.findViewById(R.id.ButtonSample);
+		newBtn.setDrawingCacheEnabled(true);
+		
 		buttonLabel = (EditText) dialog.findViewById(R.id.ButtonSampleLabelInput);
 		buttonLabel.setOnKeyListener(new OnKeyListener()
 		{
 			public boolean onKey(View v, int keyCode, KeyEvent event)
 			{
+				
+				newBtn.setText(((EditText) v).getText());
 				buttonString = ((EditText) v).getText().toString();
 				return false;
 			}
@@ -175,48 +140,50 @@ public class CreateUIActivity extends Activity
 				
 				if (checkId == R.id.RadioRed)
 				{
-					buttonColor = R.drawable.redbutton;
+					newBtn.setBackgroundResource(R.drawable.redbutton);
+					buttonColor = Color.RED;
 				}
 				else if (checkId == R.id.RadioOrange)
 				{
-					buttonColor = R.drawable.orangebutton;
+					newBtn.setBackgroundResource(R.drawable.orangebutton);
+					buttonColor = Color.BLUE;
 				}
 				else if (checkId == R.id.RadioGray)
 				{
-					buttonColor = R.drawable.graybutton;
+					newBtn.setBackgroundResource(R.drawable.graybutton);
+					buttonColor = Color.GRAY;
 				}
 			}
 			
 		});
 		
-		Button createUICreateButton = (Button) dialog.findViewById(R.id.CreateUICreateButton);
-		createUICreateButton.setOnClickListener(new OnClickListener()
+		Button createBtn = (Button) dialog.findViewById(R.id.CreateUICreateButton);
+		createBtn.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)
 			{
-				// TODO: Keybinding
 				addButtonToScreen();
-				
 				dialog.hide();
 			}
 			
 		});
 		
-		Button createUIResetBtn = (Button) dialog.findViewById(R.id.CreateUIResetButton);
-		createUIResetBtn.setOnClickListener(new OnClickListener()
+		Button resetBtn = (Button) dialog.findViewById(R.id.CreateUIResetButton);
+		resetBtn.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)
 			{
 				buttonLabel.setText("Button");
+				newBtn.setText("Button");
 				buttonString = "Button";
-				buttonColor = R.drawable.graybutton;
+				buttonColor = Color.GRAY;
 				colorGroup.check(R.id.RadioGray);
 			}
 			
 		});
 		
-		Button createUICancelBtn = (Button) dialog.findViewById(R.id.CreateUICancelButton);
-		createUICancelBtn.setOnClickListener(new OnClickListener()
+		Button cancelBtn = (Button) dialog.findViewById(R.id.CreateUICancelButton);
+		cancelBtn.setOnClickListener(new OnClickListener()
 		{
 			public void onClick(View v)
 			{
@@ -326,7 +293,6 @@ public class CreateUIActivity extends Activity
 			{
 				// this allows the user to put in a new keybinding
 				// NOT DONE
-				// TODO: Keybinding
 				dialog.hide();
 			}
 			
@@ -339,37 +305,7 @@ public class CreateUIActivity extends Activity
 			{
 				// this allows the user to rename a button
 				// NOT DONE
-				dialog.hide();
-				dialog.setContentView(R.layout.renamebutton);
-				EditText text = (EditText) dialog.findViewById(R.id.RenameButtonSampleInput);
-				text.setText(((TextView) layout.getChildAt(currentlySelected)).getText());
-				dialog.setTitle("Rename A Button");
-				dialog.setCancelable(true);
-				
-				Button renameOKBtn = (Button) dialog.findViewById(R.id.RenameOKButton);
-				renameOKBtn.setOnClickListener(new OnClickListener()
-				{
-					
-					public void onClick(View v)
-					{
-						EditText text = (EditText) dialog.findViewById(R.id.RenameButtonSampleInput);
-						((TextView) layout.getChildAt(currentlySelected)).setText(text.getText());
-						dialog.hide();
-					}
-					
-				});
-				
-				Button renameCancelBtn = (Button) dialog.findViewById(R.id.RenameCancelButton);
-				renameCancelBtn.setOnClickListener(new OnClickListener()
-				{
-					public void onClick(View v)
-					{
-						dialog.cancel();
-					}
-					
-				});
-				
-				dialog.show();
+				// MIGHT REMOVE
 			}
 			
 		});
@@ -381,13 +317,6 @@ public class CreateUIActivity extends Activity
 			{
 				// this deletes the currently selected button
 				layout.removeViewAt(currentlySelected);
-				
-				// if there's no button on the screen, disable the save button
-				if (layout.getChildCount() == 0)
-				{
-					
-				}
-				
 				dialog.cancel();
 			}
 			
@@ -455,39 +384,7 @@ public class CreateUIActivity extends Activity
 				{
 					RelativeLayout.LayoutParams par = (LayoutParams) layout.getChildAt(currentlySelected).getLayoutParams();
 					par.leftMargin += X - savedX;
-					// Grid snapping feature for x
-					if (Math.abs(par.leftMargin - 10) < 10)
-					{
-						par.leftMargin = 10;
-					}
-					else if (Math.abs(par.leftMargin - 110) < 10)
-					{
-						par.leftMargin = 110;
-					}
-					else if (Math.abs(par.leftMargin - 210) < 10)
-					{
-						par.leftMargin = 210;
-					}
-					
 					par.topMargin += Y - savedY;
-					// Grid snapping feature for y
-					if (Math.abs(par.topMargin - 10) < 10)
-					{
-						par.topMargin = 10;
-					}
-					else if (Math.abs(par.topMargin - 110) < 10)
-					{
-						par.topMargin = 110;
-					}
-					else if (Math.abs(par.topMargin - 210) < 10)
-					{
-						par.topMargin = 210;
-					}
-					else if (Math.abs(par.topMargin - 310) < 10)
-					{
-						par.topMargin = 310;
-					}
-					
 					layout.getChildAt(currentlySelected).setLayoutParams(par);
 					
 				}
@@ -509,14 +406,20 @@ public class CreateUIActivity extends Activity
 	
 	public void addButtonToScreen()
 	{
-		TextView addedButton = new TextView(CreateUIActivity.this);
-		addedButton.setText(buttonString);
-		addedButton.setBackgroundResource(buttonColor);
-		addedButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-		RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(buttonWidth, buttonHeight);
-		layoutParam.topMargin = 20;
-		layoutParam.leftMargin = 20;
-		
-		layout.addView(addedButton, layoutParam);
+		// btn.scrollTo(20, 20);
+		if (newBtn != null)
+		{
+			TextView addedButton = new TextView(CreateUIActivity.this);
+			addedButton.setText(buttonString);
+			addedButton.setBackgroundColor(buttonColor);
+			
+			// ImageView addedButton = new ImageView(CreateUIActivity.this);
+			// addedButton.setImageBitmap(newBtn.getDrawingCache());
+			RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(buttonWidth, buttonHeight);
+			layoutParam.topMargin = 0;
+			layoutParam.leftMargin = 0;
+			
+			layout.addView(addedButton, layoutParam);
+		}
 	}
 }

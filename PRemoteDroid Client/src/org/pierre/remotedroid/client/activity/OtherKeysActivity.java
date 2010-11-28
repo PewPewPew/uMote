@@ -36,7 +36,7 @@ public class OtherKeysActivity extends Activity
 		keyCom = (EditText) findViewById(R.id.EditText01);
 		
 		Bundle bundle = getIntent().getExtras();
-		keyStr = bundle.getString("Keys");
+		keyStr = bundle.getString("keys");
 		keyCom.setText(keyStr);
 	}
 	
@@ -66,7 +66,7 @@ public class OtherKeysActivity extends Activity
 		keyBinds.putString("keys", keyStr);
 		Intent intent = new Intent();
 		intent.putExtras(keyBinds);
-		setResult(RESULT_CANCELED, intent);
+		setResult(RESULT_FIRST_USER, intent);
 		finish();
 	}
 	
