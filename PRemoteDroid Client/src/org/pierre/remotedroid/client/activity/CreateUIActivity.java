@@ -4,7 +4,11 @@ import org.pierre.remotedroid.client.R;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,6 +57,10 @@ public class CreateUIActivity extends Activity
 	// used to determine if the user wants to edit a button or not
 	private boolean editButton;
 	
+	// grid guidelines
+	private Paint paint;
+	private Canvas canvas;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -67,6 +75,10 @@ public class CreateUIActivity extends Activity
 		layout.setContentDescription(this.getTitle());
 		
 		editButton = false;
+		
+		paint = new Paint();
+		paint.setColor(Color.WHITE);
+		canvas = new Canvas();
 	}
 	
 	@Override
@@ -124,8 +136,8 @@ public class CreateUIActivity extends Activity
 		{
 			public boolean onKey(View v, int keyCode, KeyEvent event)
 			{
-				
-				newBtn.setText(((EditText) v).getText());
+				//
+				// newBtn.setText(((EditText) v).getText());
 				buttonString = ((EditText) v).getText().toString();
 				return false;
 			}
@@ -177,7 +189,7 @@ public class CreateUIActivity extends Activity
 			public void onClick(View v)
 			{
 				buttonLabel.setText("Button");
-				newBtn.setText("Button");
+				// newBtn.setText("Button");
 				buttonString = "Button";
 				// buttonColor = Color.GRAY;
 				buttonColor = R.drawable.graybutton;
@@ -309,7 +321,37 @@ public class CreateUIActivity extends Activity
 			{
 				// this allows the user to rename a button
 				// NOT DONE
-				// MIGHT REMOVE
+				dialog.hide();
+				dialog.setContentView(R.layout.renamebutton);
+				EditText text = (EditText) dialog.findViewById(R.id.RenameButtonSampleInput);
+				text.setText(((TextView) layout.getChildAt(currentlySelected)).getText());
+				dialog.setTitle("Rename A Button");
+				dialog.setCancelable(true);
+				
+				Button renameOKBtn = (Button) dialog.findViewById(R.id.RenameOKButton);
+				renameOKBtn.setOnClickListener(new OnClickListener()
+				{
+					
+					public void onClick(View v)
+					{
+						EditText text = (EditText) dialog.findViewById(R.id.RenameButtonSampleInput);
+						((TextView) layout.getChildAt(currentlySelected)).setText(text.getText());
+						dialog.hide();
+					}
+					
+				});
+				
+				Button renameCancelBtn = (Button) dialog.findViewById(R.id.RenameCancelButton);
+				renameCancelBtn.setOnClickListener(new OnClickListener()
+				{
+					public void onClick(View v)
+					{
+						dialog.cancel();
+					}
+					
+				});
+				
+				dialog.show();
 			}
 			
 		});
@@ -388,7 +430,38 @@ public class CreateUIActivity extends Activity
 				{
 					RelativeLayout.LayoutParams par = (LayoutParams) layout.getChildAt(currentlySelected).getLayoutParams();
 					par.leftMargin += X - savedX;
+					// latout
+					if (Math.abs(par.leftMargin - 10) < 10)
+					{
+						par.leftMargin = 10;
+					}
+					else if (Math.abs(par.leftMargin - 110) < 10)
+					{
+						par.leftMargin = 110;
+					}
+					else if (Math.abs(par.leftMargin - 210) < 10)
+					{
+						par.leftMargin = 210;
+					}
+					
 					par.topMargin += Y - savedY;
+					if (Math.abs(par.topMargin - 10) < 10)
+					{
+						par.topMargin = 10;
+					}
+					else if (Math.abs(par.topMargin - 110) < 10)
+					{
+						par.topMargin = 110;
+					}
+					else if (Math.abs(par.topMargin - 210) < 10)
+					{
+						par.topMargin = 210;
+					}
+					else if (Math.abs(par.topMargin - 310) < 10)
+					{
+						par.topMargin = 310;
+					}
+					
 					layout.getChildAt(currentlySelected).setLayoutParams(par);
 					
 				}
@@ -417,14 +490,13 @@ public class CreateUIActivity extends Activity
 			addedButton.setText(buttonString);
 			// addedButton.setBackgroundColor(buttonColor);
 			addedButton.setBackgroundResource(buttonColor);
-			
-			// ImageView addedButton = new ImageView(CreateUIActivity.this);
-			// addedButton.setImageBitmap(newBtn.getDrawingCache());
+			addedButton.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 			RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(buttonWidth, buttonHeight);
-			layoutParam.topMargin = 0;
-			layoutParam.leftMargin = 0;
+			layoutParam.topMargin = 20;
+			layoutParam.leftMargin = 20;
 			
 			layout.addView(addedButton, layoutParam);
+			
 		}
 	}
 }
