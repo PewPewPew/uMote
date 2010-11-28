@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  android:id="@+id/renameButtonLayout"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:padding="7dip"
+  android:layout_gravity="center_horizontal">
+  
+  	<Button android:id="@+id/RenameCancelButton"
+		android:layout_width="150dip" android:layout_height="wrap_content"
+		android:text="Cancel" android:layout_alignTop="@+id/RenameOKButton"
+		android:layout_toRightOf="@+id/RenameOKButton"
+		android:textSize="20dip">
+	</Button>
+	<Button android:id="@+id/RenameOKButton"
+		android:layout_width="150dip" android:layout_height="wrap_content"
+		android:text="Rename" android:layout_below="@+id/RenameButtonSampleInput"
+		android:textSize="20dip">
+	</Button>
+	
+	<EditText android:id="@+id/RenameButtonSampleInput"
+		android:layout_width="300dip" android:layout_height="wrap_content"
+		android:text="Button" android:textSize="14sp" android:gravity="center_vertical"
+		android:autoText="true"
+		android:layout_centerHorizontal="true">
+	</EditText>
+	
+</RelativeLayout>
