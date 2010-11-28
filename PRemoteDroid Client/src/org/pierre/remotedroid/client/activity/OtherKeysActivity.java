@@ -13,17 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class KeyBindingActivity extends Activity
+public class OtherKeysActivity extends Activity
 {
 	private EditText keyCom;
 	private String keyStr = "";
-	private static final int OTHER_KEYS_REQUEST = 0;
 	
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		
-		this.setContentView(R.layout.keybinding);
+		this.setContentView(R.layout.otherkeys);
 		Drawable d = findViewById(R.id.KBUndo).getBackground();
 		PorterDuffColorFilter filter = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
 		d.setColorFilter(filter);
@@ -35,6 +34,10 @@ public class KeyBindingActivity extends Activity
 		d.setColorFilter(filter);
 		
 		keyCom = (EditText) findViewById(R.id.EditText01);
+		
+		Bundle bundle = getIntent().getExtras();
+		keyStr = bundle.getString("Keys");
+		keyCom.setText(keyStr);
 	}
 	
 	public void undo(View view)
@@ -59,12 +62,12 @@ public class KeyBindingActivity extends Activity
 	
 	public void other(View view)
 	{
+		Bundle keyBinds = new Bundle();
+		keyBinds.putString("keys", keyStr);
 		Intent intent = new Intent();
-		intent.setClass(this, OtherKeysActivity.class);
-		Bundle bundle = new Bundle();
-		bundle.putString("Keys", keyStr);
-		intent.putExtras(bundle);
-		this.startActivityForResult(intent, OTHER_KEYS_REQUEST);
+		intent.putExtras(keyBinds);
+		setResult(RESULT_CANCELED, intent);
+		finish();
 	}
 	
 	public void keys(View view)
@@ -75,30 +78,5 @@ public class KeyBindingActivity extends Activity
 		else
 			keyStr += "+" + temp.getText();
 		keyCom.setText(keyStr);
-	}
-	
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		if (requestCode == OTHER_KEYS_REQUEST)
-		{
-			if (resultCode == RESULT_OK)
-			{
-				Bundle bundle = data.getExtras();
-				keyStr = bundle.getString("keys");
-				// keyCom.setText(keyStr);
-				Bundle keyBinds = new Bundle();
-				keyBinds.putString("keys", keyStr);
-				Intent intent = new Intent();
-				intent.putExtras(keyBinds);
-				setResult(RESULT_OK, intent);
-				finish();
-			}
-			else if (resultCode == RESULT_CANCELED)
-			{
-				Bundle bundle = data.getExtras();
-				keyStr = bundle.getString("keys");
-				keyCom.setText(keyStr);
-			}
-		}
 	}
 }
