@@ -19,6 +19,7 @@ public abstract class PRemoteDroidAction
 	public static final byte FILE_EXPLORE_RESPONSE = 9;
 	public static final byte FOREGROUND_PROGRAM_REQUEST = 10;
 	public static final byte FOREGROUND_PROGRAM_RESPONSE = 11;
+	public static final byte UMOTE_REMOTE = 12;
 	
 	public static PRemoteDroidAction parse(DataInputStream dis) throws IOException
 	{
@@ -50,6 +51,8 @@ public abstract class PRemoteDroidAction
 				return ForegroundProgramRequestAction.parse(dis);
 			case FOREGROUND_PROGRAM_RESPONSE:
 				return ForegroundProgramResponseAction.parse(dis);
+			case UMOTE_REMOTE:
+				return UMoteRemoteAction.parse(dis);
 			default:
 				throw new ProtocolException();
 		}
