@@ -17,15 +17,14 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 public class CreateUIActivity extends Activity
 {
 	private static CharSequence EditText = "Select Button To Edit";
-	
 	private RelativeLayout layout;
 	
 	/** button configuration related **/
@@ -53,6 +52,9 @@ public class CreateUIActivity extends Activity
 	
 	// used to determine if the user wants to edit a button or not
 	private boolean editButton;
+	
+	private EditText inputArea;
+	private String uiFileName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -93,11 +95,78 @@ public class CreateUIActivity extends Activity
 				// they are in editButton mode
 				this.setTitle(EditText);
 				break;
+			case R.id.SaveUI:
+				saveUIDialog();
+				break;
 			default:
 				return super.onOptionsItemSelected(item);
 				
 		}
 		return true;
+	}
+	
+	public void saveUIDialog()
+	{
+		dialog = new Dialog(CreateUIActivity.this);
+		
+		dialog.setContentView(R.layout.uisave);
+		dialog.setTitle("Save UI");
+		dialog.setCancelable(true);
+		dialog.show();
+		
+		inputArea = (EditText) dialog.findViewById(R.id.SaveUIInput);
+		inputArea.setOnKeyListener(new OnKeyListener()
+		{
+			public boolean onKey(View v, int keyCode, KeyEvent event)
+			{
+				uiFileName = ((EditText) v).getText().toString();
+				return false;
+			}
+			
+		});
+		
+		Button saveBtn = (Button) dialog.findViewById(R.id.SaveUISaveBtn);
+		saveBtn.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				saveToDatabase();
+				dialog.cancel();
+			}
+			
+		});
+		
+		Button resetBtn = (Button) dialog.findViewById(R.id.SaveUIResetBtn);
+		resetBtn.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				inputArea.setText("");
+			}
+			
+		});
+		
+		Button cancelBtn = (Button) dialog.findViewById(R.id.SaveUICancelBtn);
+		cancelBtn.setOnClickListener(new OnClickListener()
+		{
+			public void onClick(View v)
+			{
+				dialog.cancel();
+			}
+			
+		});
+	}
+	
+	public void saveToDatabase()
+	{
+		DBAdapter dba = new DBAdapter(this);
+		for (int i = 0; i < layout.getChildCount(); i++)
+		{
+			TextView v = (TextView) layout.getChildAt(i);
+			int btnColor = Integer.parseInt(v.getHint().toString());
+			
+			dba.insert(uiFileName, v.getText().toString(), v.getLeft(), v.getTop(), v.getWidth(), v.getHeight(), btnColor, v.getText().toString(), "");
+		}
 	}
 	
 	public void buttonConfigDiag()
@@ -413,6 +482,11 @@ public class CreateUIActivity extends Activity
 			addedButton.setText(buttonString);
 			addedButton.setBackgroundColor(buttonColor);
 			
+			// Please don't remove the following two lines, it is used for data
+			// saving.
+			CharSequence colorHint = Integer.toString(buttonColor);
+			addedButton.setHint(colorHint);
+			
 			// ImageView addedButton = new ImageView(CreateUIActivity.this);
 			// addedButton.setImageBitmap(newBtn.getDrawingCache());
 			RelativeLayout.LayoutParams layoutParam = new RelativeLayout.LayoutParams(buttonWidth, buttonHeight);
@@ -421,5 +495,11 @@ public class CreateUIActivity extends Activity
 			
 			layout.addView(addedButton, layoutParam);
 		}
+	}
+	
+	private class ButtonColorInfo
+	{
+		public String btnName;
+		public int btnColor;
 	}
 }
