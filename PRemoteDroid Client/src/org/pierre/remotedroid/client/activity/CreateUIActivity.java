@@ -3,7 +3,10 @@ package org.pierre.remotedroid.client.activity;
 import org.pierre.remotedroid.client.R;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -17,13 +20,14 @@ import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 public class CreateUIActivity extends Activity
 {
+	private static final int KEY_BIND_REQUEST = 0;
 	private static CharSequence EditText = "Select Button To Edit";
 	
 	private RelativeLayout layout;
@@ -164,6 +168,9 @@ public class CreateUIActivity extends Activity
 			{
 				addButtonToScreen();
 				dialog.hide();
+				
+				// call key binding immediately
+				startKeyBinding();
 			}
 			
 		});
@@ -258,6 +265,35 @@ public class CreateUIActivity extends Activity
 		updateHeightText();
 	}
 	
+	// start key binding activity
+	private void startKeyBinding()
+	{
+		this.startActivityForResult(new Intent(this, KeyBindingActivity.class), KEY_BIND_REQUEST);
+	}
+	
+	// get result back from key binding
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		if (requestCode == KEY_BIND_REQUEST)
+		{
+			if (resultCode == RESULT_OK)
+			{
+				Bundle bundle = data.getExtras();
+				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("Keys bound");
+				alertDialog.setMessage(bundle.getString("keys"));
+				alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						return;
+					}
+				});
+				alertDialog.show();
+			}
+		}
+	}
+	
 	// updates the button width text object
 	private void updateWidthText()
 	{
@@ -294,6 +330,7 @@ public class CreateUIActivity extends Activity
 				// this allows the user to put in a new keybinding
 				// NOT DONE
 				dialog.hide();
+				startKeyBinding();
 			}
 			
 		});
