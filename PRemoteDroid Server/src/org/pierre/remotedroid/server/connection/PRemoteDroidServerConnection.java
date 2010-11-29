@@ -131,6 +131,10 @@ public class PRemoteDroidServerConnection implements Runnable
 			{
 				this.getForegroundProcess((ForegroundProgramRequestAction) action);
 			}
+			else if (action instanceof UMoteRemoteAction)
+			{
+				this.uMoteRemoteAction((UMoteRemoteAction) action);
+			}
 		}
 		else
 		{
