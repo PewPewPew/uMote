@@ -58,7 +58,7 @@ public class UMoteRemoteAction extends PRemoteDroidAction
 		byte[] specialKeys = new byte[specialKeysSize];
 		for (int i = 0; i < specialKeysSize; i++)
 		{
-			keys[i] = dis.readByte();
+			specialKeys[i] = dis.readByte();
 		}
 		
 		return new UMoteRemoteAction(keys, specialKeys);
