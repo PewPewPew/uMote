@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ForegroundProgramResponseAction extends PRemoteDroidAction
 {
-	String foregroundProgram;
+	public String foregroundProgram;
 	
 	public ForegroundProgramResponseAction(String foregroundProgram)
 	{
