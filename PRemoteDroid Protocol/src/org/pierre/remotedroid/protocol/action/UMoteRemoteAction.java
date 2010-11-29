@@ -7,24 +7,48 @@ import java.io.IOException;
 public class UMoteRemoteAction extends PRemoteDroidAction
 {
 	
-	public String keys;
+	public int keys[];
+	public byte specialKeys[];
 	
-	public UMoteRemoteAction(String password)
+	public UMoteRemoteAction(int keys[], byte specialKeys[])
 	{
-		this.keys = password;
+		this.keys = keys;
+		this.specialKeys = specialKeys;
 	}
 	
-	public static AuthentificationAction parse(DataInputStream dis) throws IOException
+	public static UMoteRemoteAction parse(DataInputStream dis) throws IOException
 	{
-		String password = dis.readUTF();
+		int keysSize = dis.readInt();
+		int[] keys = new int[keysSize];
+		for (int i = 0; i < keysSize; i++)
+		{
+			keys[i] = dis.readInt();
+		}
 		
-		return new AuthentificationAction(password);
+		int specialKeysSize = dis.readInt();
+		byte[] specialKeys = new byte[specialKeysSize];
+		for (int i = 0; i < specialKeysSize; i++)
+		{
+			keys[i] = dis.readByte();
+		}
+		
+		return new UMoteRemoteAction(keys, specialKeys);
 	}
 	
 	public void toDataOutputStream(DataOutputStream dos) throws IOException
 	{
-		dos.writeByte(AUTHENTIFICATION);
-		dos.writeUTF(this.keys);
+		dos.writeByte(UMOTE_REMOTE);
+		
+		dos.writeInt(this.keys.length);
+		for (int key : this.keys)
+		{
+			dos.writeInt(key);
+		}
+		
+		dos.writeInt(this.specialKeys.length);
+		for (byte specialKey : this.specialKeys)
+		{
+			dos.writeByte(specialKey);
+		}
 	}
-	
 }
