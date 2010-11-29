@@ -5,6 +5,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -33,7 +34,9 @@ import org.pierre.remotedroid.protocol.action.MouseWheelAction;
 import org.pierre.remotedroid.protocol.action.PRemoteDroidAction;
 import org.pierre.remotedroid.protocol.action.ScreenCaptureRequestAction;
 import org.pierre.remotedroid.protocol.action.ScreenCaptureResponseAction;
+import org.pierre.remotedroid.protocol.action.UMoteRemoteAction;
 import org.pierre.remotedroid.server.PRemoteDroidServerApp;
+import org.pierre.remotedroid.server.tools.UMoteToSwingKeyCodeConverter;
 import org.pierre.remotedroid.server.tools.UnicodeToSwingKeyCodeConverter;
 
 public class PRemoteDroidServerConnection implements Runnable
@@ -456,6 +459,33 @@ public class PRemoteDroidServerConnection implements Runnable
 			{
 				this.application.getRobot().keyRelease(KeyEvent.VK_SHIFT);
 			}
+		}
+	}
+	
+	private void uMoteRemoteAction(UMoteRemoteAction action)
+	{
+		int keyPressSize = action.keys.length + action.specialKeys.length;
+		int virtualKeys[] = new int[keyPressSize];
+		
+		for (int i = 0; i < action.keys.length; i++)
+		{
+			virtualKeys[i] = UnicodeToSwingKeyCodeConverter.convert(action.keys[i]);
+		}
+		
+		for (int i = 0; i < action.specialKeys.length; i++)
+		{
+			virtualKeys[i + action.keys.length] = UMoteToSwingKeyCodeConverter.convertSpecial(action.specialKeys[i]);
+		}
+		
+		Robot robo = this.application.getRobot();
+		for (int keycode : virtualKeys)
+		{
+			robo.keyPress(keycode);
+		}
+		
+		for (int keycode : virtualKeys)
+		{
+			robo.keyRelease(keycode);
 		}
 	}
 	
