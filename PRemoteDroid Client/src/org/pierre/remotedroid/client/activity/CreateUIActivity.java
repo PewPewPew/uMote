@@ -596,8 +596,8 @@ public class CreateUIActivity extends Activity {
 
 				// check all the bounds of the button (square)
 				if (X > v.getLeft() && X < v.getLeft() + v.getWidth()
-						&& Y > v.getTop() + 100
-						&& Y < v.getTop() + v.getHeight() + 100) {
+						&& Y > v.getTop() + 50
+						&& Y < v.getTop() + v.getHeight() + 50) {
 					currentlySelected = i;
 					break;
 				}
@@ -626,25 +626,22 @@ public class CreateUIActivity extends Activity {
 				RelativeLayout.LayoutParams par = (LayoutParams) layout
 						.getChildAt(currentlySelected).getLayoutParams();
 				par.leftMargin += X - savedX;
-				// Grid snapping feature for x
-				if (Math.abs(par.leftMargin - 10) < 10) {
-					par.leftMargin = 10;
-				} else if (Math.abs(par.leftMargin - 110) < 10) {
-					par.leftMargin = 110;
-				} else if (Math.abs(par.leftMargin - 210) < 10) {
-					par.leftMargin = 210;
-				}
+				/*
+				 * // Grid snapping feature for x if (Math.abs(par.leftMargin -
+				 * 10) < 10) { par.leftMargin = 10; } else if
+				 * (Math.abs(par.leftMargin - 110) < 10) { par.leftMargin = 110;
+				 * } else if (Math.abs(par.leftMargin - 210) < 10) {
+				 * par.leftMargin = 210; }
+				 */
 				par.topMargin += Y - savedY;
-				// Grid snapping feature for y
-				if (Math.abs(par.topMargin - 10) < 10) {
-					par.topMargin = 10;
-				} else if (Math.abs(par.topMargin - 110) < 10) {
-					par.topMargin = 110;
-				} else if (Math.abs(par.topMargin - 210) < 10) {
-					par.topMargin = 210;
-				} else if (Math.abs(par.topMargin - 310) < 10) {
-					par.topMargin = 310;
-				}
+				/*
+				 * // Grid snapping feature for y if (Math.abs(par.topMargin -
+				 * 10) < 10) { par.topMargin = 10; } else if
+				 * (Math.abs(par.topMargin - 110) < 10) { par.topMargin = 110; }
+				 * else if (Math.abs(par.topMargin - 210) < 10) { par.topMargin
+				 * = 210; } else if (Math.abs(par.topMargin - 310) < 10) {
+				 * par.topMargin = 310; }
+				 */
 				layout.getChildAt(currentlySelected).setLayoutParams(par);
 
 			}
