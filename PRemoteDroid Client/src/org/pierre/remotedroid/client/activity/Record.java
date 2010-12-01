@@ -2,7 +2,7 @@ package org.pierre.remotedroid.client.activity;
 
 public class Record
 {
-	private String name;
+	private int id;
 	private int x;
 	private int y;
 	private int width;
@@ -14,9 +14,9 @@ public class Record
 	
 	// private String icon;
 	
-	public Record(String name, int x, int y, int width, int height, int color, String label, String keyBinding)
+	public Record(int id, int x, int y, int width, int height, int color, String label, String keyBinding)
 	{
-		this.name = name;
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -27,9 +27,9 @@ public class Record
 		this.keyBinding = keyBinding;
 	}
 	
-	public String getName()
+	public int getId()
 	{
-		return this.name;
+		return this.id;
 	}
 	
 	public int getX()

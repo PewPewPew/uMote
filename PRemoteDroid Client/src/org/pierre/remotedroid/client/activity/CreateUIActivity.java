@@ -1,5 +1,7 @@
 package org.pierre.remotedroid.client.activity;
 
+import java.util.ArrayList;
+
 import org.pierre.remotedroid.client.R;
 
 import android.app.Activity;
@@ -28,6 +30,7 @@ import android.widget.TextView;
 public class CreateUIActivity extends Activity
 {
 	private static final int KEY_BIND_REQUEST = 0;
+	private static final int EDIT_KEY_BIND_REQUEST = 1;
 	private static CharSequence EditText = "Select Button To Edit";
 	private RelativeLayout layout;
 	
@@ -39,6 +42,9 @@ public class CreateUIActivity extends Activity
 	private RadioGroup colorGroup;
 	// private Button newBtn;
 	/** END button configuration related **/
+	
+	// ArrayList for key binding
+	ArrayList<String> keyArray = new ArrayList<String>();
 	
 	// button fields START
 	private String buttonString;
@@ -75,6 +81,7 @@ public class CreateUIActivity extends Activity
 		layout.setContentDescription(this.getTitle());
 		
 		editButton = false;
+		// dialog.show();
 	}
 	
 	@Override
@@ -209,8 +216,8 @@ public class CreateUIActivity extends Activity
 		{
 			TextView v = (TextView) layout.getChildAt(i);
 			int btnColor = Integer.parseInt(v.getHint().toString());
-			
-			dba.insert(uiFileName, v.getText().toString(), v.getLeft(), v.getTop(), v.getWidth(), v.getHeight(), btnColor, v.getText().toString(), "");
+			String keyString = keyArray.get(i);
+			dba.insert(uiFileName, i, v.getLeft(), v.getTop(), v.getWidth(), v.getHeight(), btnColor, v.getText().toString(), keyString);
 		}
 	}
 	
@@ -276,7 +283,7 @@ public class CreateUIActivity extends Activity
 				dialog.hide();
 				
 				// call key binding immediately
-				startKeyBinding();
+				startKeyBinding(KEY_BIND_REQUEST);
 			}
 			
 		});
@@ -371,9 +378,9 @@ public class CreateUIActivity extends Activity
 	}
 	
 	// start key binding activity
-	private void startKeyBinding()
+	private void startKeyBinding(int requestNum)
 	{
-		this.startActivityForResult(new Intent(this, KeyBindingActivity.class), KEY_BIND_REQUEST);
+		this.startActivityForResult(new Intent(this, KeyBindingActivity.class), requestNum);
 	}
 	
 	// get result back from key binding
@@ -390,7 +397,43 @@ public class CreateUIActivity extends Activity
 				String keyStr = bundle.getString("keys"); // this is the key
 				                                          // binding string
 				                                          // returned
-				alertDialog.setMessage(keyStr);
+				// add the key binding to array to save
+				keyArray.add(layout.getChildCount() - 1, keyStr);
+				String debugMessage = "";
+				for (int i = 0; i < layout.getChildCount(); i++)
+				{
+					debugMessage += keyArray.get(i);
+				}
+				alertDialog.setMessage(debugMessage);
+				alertDialog.setButton("OK", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int which)
+					{
+						return;
+					}
+				});
+				alertDialog.show();
+			}
+		}
+		else if (requestCode == EDIT_KEY_BIND_REQUEST)
+		{
+			if (resultCode == RESULT_OK)
+			{
+				Bundle bundle = data.getExtras();
+				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+				alertDialog.setTitle("Keys bound");
+				
+				String keyStr = bundle.getString("keys"); // this is the key
+				                                          // binding string
+				                                          // returned
+				// edit the element in the key binding array
+				keyArray.set(currentlySelected, keyStr);
+				String debugMessage = "";
+				for (int i = 0; i < layout.getChildCount(); i++)
+				{
+					debugMessage += keyArray.get(i);
+				}
+				alertDialog.setMessage(debugMessage);
 				alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int which)
@@ -439,7 +482,7 @@ public class CreateUIActivity extends Activity
 				// this allows the user to put in a new keybinding
 				// NOT DONE
 				dialog.hide();
-				startKeyBinding();
+				startKeyBinding(EDIT_KEY_BIND_REQUEST);
 			}
 			
 		});
@@ -493,6 +536,7 @@ public class CreateUIActivity extends Activity
 			{
 				// this deletes the currently selected button
 				layout.removeViewAt(currentlySelected);
+				keyArray.remove(currentlySelected);
 				
 				// if there's no button on the screen, disable the save button
 				if (layout.getChildCount() == 0)

@@ -97,7 +97,7 @@ public class UIMainMenuActivity extends Activity implements PRemoteDroidActionRe
 		// Go to the User Interface Selection screen
 		
 		// temporary
-		this.startActivityForResult(new Intent(this, KeyBindingActivity.class), KEY_BIND_REQUEST);
+		this.startActivity(new Intent(this, UISelectionActivity.class));
 		
 	}
 	

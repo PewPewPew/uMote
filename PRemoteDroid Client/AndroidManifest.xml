@@ -61,6 +61,10 @@
 			android:name=".activity.OtherKeysActivity" 
 			android:screenOrientation="landscape" 
 			android:configChanges="orientation|keyboardHidden"></activity>
+		<activity
+            android:name=".activity.UISelectionActivity"
+            android:label="@string/text_UI_Main_Menu_UISelection"
+            android:screenOrientation="portrait"></activity>
 	</application>
 	<supports-screens
 		android:smallScreens="true"
