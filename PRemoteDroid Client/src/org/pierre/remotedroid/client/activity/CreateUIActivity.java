@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout.LayoutParams;
 
@@ -211,13 +212,49 @@ public class CreateUIActivity extends Activity {
 
 	public void saveToDatabase() {
 		DBAdapter dba = new DBAdapter(this);
+		boolean flag = true;
 		for (int i = 0; i < layout.getChildCount(); i++) {
 			TextView v = (TextView) layout.getChildAt(i);
 			int btnColor = Integer.parseInt(v.getHint().toString());
 			String keyString = keyArray.get(i);
-			dba.insert(uiFileName, i, v.getLeft(), v.getTop(), v.getWidth(), v
-					.getHeight(), btnColor, v.getText().toString(), keyString);
+			int rtn = dba.insert(uiFileName, i, v.getLeft(), v.getTop(), v
+					.getWidth(), v.getHeight(), btnColor, v.getText()
+					.toString(), keyString);
+			if (rtn == -1) {
+				AlertDialog alertInsert = new AlertDialog.Builder(this)
+						.create();
+				alertInsert.setTitle("Insert");
+				alertInsert.setMessage("UI file name already exists");
+				alertInsert.setButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								return;
+							}
+						});
+				alertInsert.show();
+				flag = false;
+				break;
+			} else if (rtn == 0) {
+				AlertDialog alertInsert = new AlertDialog.Builder(this)
+						.create();
+				alertInsert.setTitle("Insert");
+				alertInsert.setMessage("Insert error.");
+				alertInsert.setButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								return;
+							}
+						});
+				alertInsert.show();
+				flag = false;
+				break;
+			}
 		}
+		if (flag == true)
+			Toast.makeText(this, "UI saved successfully", Toast.LENGTH_LONG)
+					.show();
 	}
 
 	public void buttonConfigDiag() {

@@ -42,15 +42,27 @@ public class DBAdapter
 	}
 	
 	// Check if the table exists, if not, create it
-	private void checkTable(String tableName)
+	private int checkTable(String tableName)
 	{
-		final String DB_CREATE = "CREATE TABLE IF NOT EXISTS " + tableName + "(" + KEY_NAME + " INTEGER PRIMARY KEY, " + KEY_X + " INTEGER NOT NULL, " + KEY_Y + " INTEGER NOT NULL, " + KEY_WIDTH + " INTEGER NOT NULL, " + KEY_HEIGHT + " INTEGER NOT NULL, "
+		// final String DB_CREATE = "CREATE TABLE IF NOT EXISTS " + tableName +
+		// "(" + KEY_NAME + " INTEGER PRIMARY KEY, " + KEY_X +
+		// " INTEGER NOT NULL, " + KEY_Y + " INTEGER NOT NULL, " + KEY_WIDTH +
+		// " INTEGER NOT NULL, " + KEY_HEIGHT + " INTEGER NOT NULL, "
 		// + KEY_GRID + " INTEGER NOT NULL, "
-		        + KEY_COLOR + " INTEGER NOT NULL, " + KEY_LABEL + " TEXT NOT NULL, " + KEY_KEYBINDING + " TEXT);";
+		// + KEY_COLOR + " INTEGER NOT NULL, " + KEY_LABEL + " TEXT NOT NULL, "
+		// + KEY_KEYBINDING + " TEXT);";
+		
+		final String DB_CHECK = "SELECT NAME FROM SQLITE_MASTER WHERE TYPE='table' AND NAME='" + tableName + "';";
 		
 		this.open();
-		db.execSQL(DB_CREATE);
+		Cursor c = db.rawQuery(DB_CHECK, null);
+		if (c.getCount() == 0)
+		{
+			this.close();
+			return 1;
+		}
 		this.close();
+		return 0;
 	}
 	
 	// Open the database
@@ -67,12 +79,21 @@ public class DBAdapter
 	}
 	
 	// Insert an entry into a table
-	public void insert(String layoutName, int btnName, int x, int y, int width, int height, int color, String label, String keyBinding)
+	public int insert(String layoutName, int btnName, int x, int y, int width, int height, int color, String label, String keyBinding)
 	{
 		
-		checkTable(layoutName);
+		if (checkTable(layoutName) == 0)
+		{
+			// Toast.makeText(context, layoutName + " already exists.",
+			// Toast.LENGTH_LONG).show();
+			return -1;
+		}
 		
 		this.open();
+		final String DB_CREATE = "CREATE TABLE " + layoutName + "(" + KEY_NAME + " TEXT PRIMARY KEY, " + KEY_X + " INTEGER NOT NULL, " + KEY_Y + " INTEGER NOT NULL, " + KEY_WIDTH + " INTEGER NOT NULL, " + KEY_HEIGHT + " INTEGER NOT NULL, "
+		// + KEY_GRID + " INTEGER NOT NULL, "
+		        + KEY_COLOR + " INTEGER NOT NULL, " + KEY_LABEL + " TEXT NOT NULL, " + KEY_KEYBINDING + " TEXT NOT NULL);";
+		db.execSQL(DB_CREATE);
 		ContentValues uiValues = new ContentValues();
 		uiValues.put(KEY_NAME, btnName);
 		uiValues.put(KEY_X, x);
@@ -84,10 +105,15 @@ public class DBAdapter
 		uiValues.put(KEY_LABEL, label);
 		uiValues.put(KEY_KEYBINDING, keyBinding);
 		if (db.insert(layoutName, null, uiValues) == -1L)
-			Toast.makeText(context, btnName + " already exists.", Toast.LENGTH_LONG).show();
+		{
+			this.close();
+			return 0;
+		}
 		else
-			Toast.makeText(context, btnName + " saved.", Toast.LENGTH_SHORT).show();
-		this.close();
+		{
+			this.close();
+			return 1;
+		}
 	}
 	
 	// Search for all the records in a table
