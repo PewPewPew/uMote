@@ -10,15 +10,15 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -167,15 +167,38 @@ public class CreateUIActivity extends Activity
 		dialog.show();
 		
 		inputArea = (EditText) dialog.findViewById(R.id.SaveUIInput);
-		inputArea.setOnKeyListener(new OnKeyListener()
+		inputArea.addTextChangedListener(new TextWatcher()
 		{
-			public boolean onKey(View v, int keyCode, KeyEvent event)
+			
+			public void afterTextChanged(Editable s)
 			{
-				uiFileName = ((EditText) v).getText().toString();
-				return false;
+				uiFileName = inputArea.getText().toString();
 			}
 			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				// TODO Auto-generated method stub
+				
+			}
 		});
+		
+		// .setOnKeyListener(new OnKeyListener()
+		// {
+		// public boolean onKey(View v, int keyCode, KeyEvent event)
+		// {
+		// uiFileName = ((EditText) v).getText().toString();
+		// return false;
+		// }
+		//
+		// });
 		
 		Button saveBtn = (Button) dialog.findViewById(R.id.SaveUISaveBtn);
 		saveBtn.setOnClickListener(new OnClickListener()
@@ -241,16 +264,38 @@ public class CreateUIActivity extends Activity
 		// newBtn.setDrawingCacheEnabled(true);
 		
 		buttonLabel = (EditText) dialog.findViewById(R.id.ButtonSampleLabelInput);
-		buttonLabel.setOnKeyListener(new OnKeyListener()
+		buttonLabel.addTextChangedListener(new TextWatcher()
 		{
-			public boolean onKey(View v, int keyCode, KeyEvent event)
+			
+			public void afterTextChanged(Editable s)
 			{
-				// newBtn.setText(((EditText) v).getText());
-				buttonString = ((EditText) v).getText().toString();
-				return false;
+				buttonString = buttonLabel.getText().toString();
 			}
 			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				// TODO Auto-generated method stub
+				
+			}
 		});
+		// .setOnKeyListener(new OnKeyListener()
+		// {
+		// public boolean onKey(View v, int keyCode, KeyEvent event)
+		// {
+		// // newBtn.setText(((EditText) v).getText());
+		// buttonString = ((EditText) v).getText().toString();
+		// return false;
+		// }
+		//
+		// });
 		
 		colorGroup = (RadioGroup) dialog.findViewById(R.id.ColorRadioGroup);
 		colorGroup.setOnCheckedChangeListener(new OnCheckedChangeListener()

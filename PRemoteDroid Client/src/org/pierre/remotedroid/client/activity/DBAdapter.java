@@ -83,12 +83,10 @@ public class DBAdapter
 		uiValues.put(KEY_COLOR, color);
 		uiValues.put(KEY_LABEL, label);
 		uiValues.put(KEY_KEYBINDING, keyBinding);
-		// if (db.insert(layoutName, null, uiValues) == -1L)
-		// Toast.makeText(context, btnName + " already exists.",
-		// Toast.LENGTH_LONG).show();
-		// else
-		// Toast.makeText(context, btnName + " saved.",
-		// Toast.LENGTH_SHORT).show();
+		if (db.insert(layoutName, null, uiValues) == -1L)
+			Toast.makeText(context, btnName + " already exists.", Toast.LENGTH_LONG).show();
+		else
+			Toast.makeText(context, btnName + " saved.", Toast.LENGTH_SHORT).show();
 		this.close();
 	}
 	
