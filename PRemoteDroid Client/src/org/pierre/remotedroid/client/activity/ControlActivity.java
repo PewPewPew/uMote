@@ -16,9 +16,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -42,7 +42,7 @@ public class ControlActivity extends Activity implements PRemoteDroidActionRecei
 	private static final int HELP_MENU_ITEM_ID = 4;
 	// Added for UI mode
 	private static final int UI_MENU_ITEM_ID = 5;
-	private static CharSequence UItext = "UI Menu";
+	private static CharSequence UItext = "Remote Mode";
 	
 	private PRemoteDroid application;
 	private SharedPreferences preferences;

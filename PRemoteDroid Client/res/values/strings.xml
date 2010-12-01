@@ -167,15 +167,15 @@
 	<string
 		name="text_save">Save</string>
 	<string
-		name="text_new_connection">New connection</string>
+		name="text_new_connection">New Connection</string>
 	<string
 		name="text_hint_host">192.168.x.x</string>
-<string name="text_UI_Main_Menu_UISelection">Select User Interface</string>
+<string name="text_UI_Main_Menu_UISelection">Remote Mode</string>
 <string name="text_UI_Main_Menu_Title">uMote Main Menu</string>
-<string name="text_UI_Creation_Title">Create Your Own UI</string>
-<string name="text_Key_Binding_Title">Key Binding</string>
-<string name="text_UI_Main_Menu_UICreation">Create New User Interface</string>
-<string name="text_UI_Main_Menu_UIEdit">Edit User Interface</string>
+<string name="text_UI_Creation_Title">Create a New Remote</string>
+<string name="text_Key_Binding_Title">Configure Key Binding</string>
+<string name="text_UI_Main_Menu_UICreation">Create a New Remote</string>
+<string name="text_UI_Main_Menu_UIEdit">Edit Existing Remote</string>
 <string name="text_UI_Main_Menu_UIHelp">Help</string>
 <string name="text_UI_Help_Description">Description:</string>
 <string name="text_UI_Help_Description_Content">Welcome to uMote! An application that allows you to both use and create your own remote control interfaces for use with computer programs. </string>
