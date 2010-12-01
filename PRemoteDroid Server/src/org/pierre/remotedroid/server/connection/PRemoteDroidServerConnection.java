@@ -411,7 +411,7 @@ public class PRemoteDroidServerConnection implements Runnable
 	private void keyboardUnicodeWindowsAltTrick(KeyboardAction action)
 	{
 		boolean exception = false;
-		
+		System.out.println(action.unicode);
 		for (int i = 0; i < UNICODE_EXCEPTION.length; i++)
 		{
 			if (action.unicode == UNICODE_EXCEPTION[i][0])
@@ -468,22 +468,24 @@ public class PRemoteDroidServerConnection implements Runnable
 	
 	private void uMoteRemoteAction(UMoteRemoteAction action)
 	{
-		int keyPressSize = action.keys.length + action.specialKeys.length;
+		
+		int keyPressSize = action.keys.size() + action.specialKeys.size();
 		int virtualKeys[] = new int[keyPressSize];
 		
-		for (int i = 0; i < action.keys.length; i++)
+		for (int i = 0; i < action.specialKeys.size(); i++)
 		{
-			virtualKeys[i] = UnicodeToSwingKeyCodeConverter.convert(action.keys[i]);
+			virtualKeys[i] = UMoteToSwingKeyCodeConverter.convertSpecial(action.specialKeys.get(i));
+		}
+		for (int i = 0; i < action.keys.size(); i++)
+		{
+			virtualKeys[i + action.specialKeys.size()] = UnicodeToSwingKeyCodeConverter.convert(action.keys.get(i).intValue());
 		}
 		
-		for (int i = 0; i < action.specialKeys.length; i++)
-		{
-			virtualKeys[i + action.keys.length] = UMoteToSwingKeyCodeConverter.convertSpecial(action.specialKeys[i]);
-		}
-		
+		// if virtualKeys[0] == KeyEvent.VK_K && virtualKeys[1] == KeyEvent.VK_
 		Robot robo = this.application.getRobot();
 		for (int keycode : virtualKeys)
 		{
+			// System.out.println(keycode);
 			robo.keyPress(keycode);
 		}
 		
@@ -491,6 +493,7 @@ public class PRemoteDroidServerConnection implements Runnable
 		{
 			robo.keyRelease(keycode);
 		}
+		
 	}
 	
 	private void sendAction(PRemoteDroidAction action)
