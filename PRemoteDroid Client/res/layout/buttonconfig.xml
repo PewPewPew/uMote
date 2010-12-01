@@ -55,36 +55,16 @@
 	<EditText android:id="@+id/ButtonSampleLabelInput"
 		android:layout_width="300dip" android:layout_height="wrap_content"
 		android:text="Button" android:textSize="14sp" android:gravity="center_vertical"
-		android:autoText="true" android:layout_below="@+id/ButtonSampleLabel"
+		android:autoText="true" android:layout_below="@+id/WidthNumber"
+		android:layout_marginTop="15dip"
 		android:layout_alignParentLeft="true">
 	</EditText>
-	<TextView android:id="@+id/ButtonSampleLabel"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:layout_marginTop="10dip" android:text="Name Your Button:"
-		android:textStyle="bold" android:textSize="14sp" android:layout_below="@+id/ButtonSampleBar"
-		android:layout_alignParentLeft="true">
-	</TextView>
-	<AbsoluteLayout android:id="@+id/ButtonSampleBar"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"
-		android:padding="5dip"
-		android:layout_centerHorizontal="true" android:layout_below="@+id/ButtonSampleBarLabel"
-		android:layout_alignParentLeft="true">
-		<Button android:id="@+id/ButtonSample" android:layout_width="30dip"
-			android:layout_height="38dip" android:text="Button"
-			android:background="@drawable/graybutton"
-			android:layout_x="0dip" android:layout_y="2dip">
-		</Button>
-	</AbsoluteLayout>
-	<TextView android:id="@+id/ButtonSampleBarLabel"
-		android:layout_width="wrap_content" android:layout_height="wrap_content"
-	    android:text="Preview:"
-		android:textStyle="bold" android:textSize="14sp">
-	</TextView>
+
 	<TextView android:id="@+id/ButtonWidthLabel"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"
 	    android:text="Width:"
 	    android:layout_alignParentRight="true"
-	    android:layout_marginRight="60dip"
+	    android:layout_marginRight="80dip"
 		android:textStyle="bold" android:textSize="14sp">
 	</TextView>
 	<TextView android:id="@+id/ButtonHeightLabel"
@@ -92,7 +72,7 @@
 	    android:text="Height:"
 	    android:layout_alignBottom="@+id/ButtonWidthLabel"
 	    android:layout_alignRight="@+id/ButtonWidthLabel"
-	    android:layout_marginRight="100dip"
+	    android:layout_marginRight="150dip"
 		android:textStyle="bold" android:textSize="14sp">
 	</TextView>
 	<TextView android:id="@+id/WidthNumber"
@@ -103,13 +83,13 @@
 		android:textStyle="bold" android:textSize="20sp">
 	</TextView>
 	<Button android:id="@+id/WidthUpButton"
-		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:layout_width="40dip" android:layout_height="wrap_content"
 		android:text="+" 
 		android:layout_below="@+id/ButtonWidthLabel"
 		android:layout_toRightOf="@+id/WidthNumber">
 	</Button>
 	<Button android:id="@+id/WidthDownButton"
-		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:layout_width="40dip" android:layout_height="wrap_content"
 		android:text="-" android:layout_toRightOf="@+id/WidthUpButton"
 		android:layout_alignBottom="@+id/WidthUpButton">
 	</Button>
@@ -121,13 +101,13 @@
 		android:textStyle="bold" android:textSize="20sp">
 	</TextView>
 	<Button android:id="@+id/HeightUpButton"
-		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:layout_width="40dip" android:layout_height="wrap_content"
 		android:text="+" 
 		android:layout_below="@+id/ButtonHeightLabel"
 		android:layout_toRightOf="@+id/HeightNumber">
 	</Button>
 	<Button android:id="@+id/HeightDownButton"
-		android:layout_width="30dip" android:layout_height="wrap_content"
+		android:layout_width="40dip" android:layout_height="wrap_content"
 		android:text="-" android:layout_toRightOf="@+id/HeightUpButton"
 		android:layout_alignBottom="@+id/HeightUpButton">
 	</Button>
