@@ -276,7 +276,7 @@ public class CreateUIActivity extends Activity
 				dialog.hide();
 				
 				// call key binding immediately
-				// startKeyBinding();
+				startKeyBinding();
 			}
 			
 		});
@@ -386,7 +386,11 @@ public class CreateUIActivity extends Activity
 				Bundle bundle = data.getExtras();
 				AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 				alertDialog.setTitle("Keys bound");
-				alertDialog.setMessage(bundle.getString("keys"));
+				
+				String keyStr = bundle.getString("keys"); // this is the key
+				                                          // binding string
+				                                          // returned
+				alertDialog.setMessage(keyStr);
 				alertDialog.setButton("OK", new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int which)
