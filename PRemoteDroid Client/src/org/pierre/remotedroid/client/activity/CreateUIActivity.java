@@ -138,8 +138,6 @@ public class CreateUIActivity extends Activity {
 				saveUIDialog();
 			}
 			break;
-		case R.id.LoadUI:
-			break;
 		default:
 			return super.onOptionsItemSelected(item);
 

@@ -4,5 +4,5 @@
 	<item android:title="Reset" android:id="@+id/ResetUIScreen"></item>
 
 	<item android:title="Save" android:id="@+id/SaveUI" android:enabled="true"></item>
-	<item android:title="Load" android:id="@+id/LoadUI"></item>
+	
 </menu>
